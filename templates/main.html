@@ -1,0 +1,58 @@
+<html>
+<title>App</title>
+{% include 'base.html' %}
+
+<link rel="stylesheet" href="/static/css/main.css" type="text/css">
+<link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css">
+<script src="/static/js/main.js"></script>
+
+<div class="container">
+    <form method="post" class="justify-content-center" name="form" action="/execute" enctype="multipart/form-data"
+        id="form" style="width: 100%" onsubmit="return validate_build_selection()">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group files color">
+                    <label>Upload Input File.</label>
+                    <input type="file" name="input_file" id="input_file" class="form-control" accept=".csv"
+                        autocomplete="off" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group files color">
+                    <label>Upload Build File</label>
+                    {% if stored_builds %}
+                    <input type="file" name="build_file" id="build_file" class="form-control" accept=".tgz"
+                        autocomplete="off">
+                    {% else %}
+                    <input type="file" name="build_file" id="build_file" class="form-control" accept=".tgz"
+                        autocomplete="off" required>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <select name="build_files" id="build_files" class="form-control" style="height: 50px;"
+                    data-toggle="tooltip" title="Choose any old build if you are not a uploading new build">
+                    <option value='' selected hidden>Choose any old input if you are not a uploading new</option>
+                    {% for build in stored_builds %}
+                    {% set build = build %}
+                    <option value={{ build }}>{{ build }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="text" id="build_no" name="build_no" style="height: 50px;" class="form-control"
+                    placeholder="Target Build Number" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 ">
+                <button type="submit" class="btn btn-primary btn-lg btn-huge" id="submit"
+                    style="margin-top:60px;width: 400px;height: 120px">Execute</button>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </form>
+</div>

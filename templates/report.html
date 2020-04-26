@@ -1,0 +1,11 @@
+<html>
+<title>Downloads</title>
+{% include 'base.html' %}
+{% set filename = filename %}
+{% if filename %}
+{% include 'download.html' %}
+{% else %}
+No Output file present
+{% endif %}
+{{excel|safe}}
+</html>
