@@ -8,7 +8,10 @@ import pandas as pd
 from werkzeug.utils import secure_filename
 from app_settings import APP
 
+
 LOG = APP.logger
+
+
 
 class ApiUtils:
     """
